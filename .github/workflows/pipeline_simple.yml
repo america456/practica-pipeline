@@ -1,0 +1,40 @@
+name: Pipeline 5 Fases
+
+on:
+  push:
+
+jobs:
+
+  Preparacion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preparando entorno
+        run: echo "Configurando entorno del sistema..." && sleep 3
+
+  Compilacion:
+    needs: Preparacion
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compilando proyecto
+        run: echo "Compilando codigo fuente..." && sleep 4
+
+  Pruebas_Frontend:
+    needs: Compilacion
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ejecutando pruebas Frontend
+        run: echo "Probando interfaz de usuario..." && sleep 5
+
+  Pruebas_Backend:
+    needs: Compilacion
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ejecutando pruebas Backend
+        run: echo "Probando logica del servidor..." && sleep 5
+
+  Despliegue:
+    needs: [Pruebas_Frontend, Pruebas_Backend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Desplegando aplicacion
+        run: echo "Sistema desplegado correctamente." && sleep 3

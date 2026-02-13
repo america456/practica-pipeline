@@ -1,0 +1,40 @@
+name: Experimento CPU - Error
+
+on:
+  push:
+
+jobs:
+
+  IF:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instruction Fetch
+        run: echo "Buscando instruccion..." && sleep 3
+
+  ID:
+    needs: IF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instruction Decode
+        run: echo "Decodificando instruccion..." && sleep 3
+
+  EX:
+    needs: ID
+    runs-on: ubuntu-latest
+    steps:
+      - name: Forzando error en ejecucion
+        run: exit 1
+
+  MEM:
+    needs: EX
+    runs-on: ubuntu-latest
+    steps:
+      - name: Memory Access
+        run: echo "Accediendo a memoria..."
+
+  WB:
+    needs: MEM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write Back
+        run: echo "Guardando resultado..."

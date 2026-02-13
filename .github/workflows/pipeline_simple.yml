@@ -1,40 +1,40 @@
-name: Pipeline Base 5 Fases
+name: Pipeline CPU 5 Etapas
 
 on:
   push:
 
 jobs:
 
-  Preparacion:
+  IF:
     runs-on: ubuntu-latest
     steps:
-      - name: Preparando entorno
-        run: echo "Configurando entorno..." && sleep 3
+      - name: Instruction Fetch
+        run: echo "Buscando instruccion en memoria..." && sleep 3
 
-  Compilacion:
-    needs: Preparacion
+  ID:
+    needs: IF
     runs-on: ubuntu-latest
     steps:
-      - name: Compilando proyecto
-        run: echo "Compilando codigo..." && sleep 4
+      - name: Instruction Decode
+        run: echo "Decodificando instruccion..." && sleep 3
 
-  Pruebas:
-    needs: Compilacion
+  EX:
+    needs: ID
     runs-on: ubuntu-latest
     steps:
-      - name: Ejecutando pruebas
-        run: echo "Validando sistema..." && sleep 5
+      - name: Execute
+        run: echo "Ejecutando operacion en ALU..." && sleep 3
 
-  Validacion_Final:
-    needs: Pruebas
+  MEM:
+    needs: EX
     runs-on: ubuntu-latest
     steps:
-      - name: Verificando calidad
-        run: echo "Revisando calidad del build..." && sleep 3
+      - name: Memory Access
+        run: echo "Accediendo a memoria..." && sleep 3
 
-  Despliegue:
-    needs: Validacion_Final
+  WB:
+    needs: MEM
     runs-on: ubuntu-latest
     steps:
-      - name: Desplegando sistema
-        run: echo "Sistema desplegado exitosamente." && sleep 3
+      - name: Write Back
+        run: echo "Escribiendo resultado en registro." && sleep 3

@@ -1,0 +1,47 @@
+name: Experimento CPU - Paralelismo
+
+on:
+  push:
+
+jobs:
+
+  IF:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instruction Fetch
+        run: echo "Buscando instruccion..." && sleep 3
+
+  ID:
+    needs: IF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instruction Decode
+        run: echo "Decodificando instruccion..." && sleep 3
+
+  EX_1:
+    needs: ID
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute 1
+        run: echo "Ejecutando instruccion 1..." && sleep 4
+
+  EX_2:
+    needs: ID
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute 2
+        run: echo "Ejecutando instruccion 2..." && sleep 4
+
+  MEM:
+    needs: [EX_1, EX_2]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Memory Access
+        run: echo "Accediendo a memoria despues de ambas ejecuciones..." && sleep 3
+
+  WB:
+    needs: MEM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write Back
+        run: echo "Guardando resultados finales." && sleep 3
